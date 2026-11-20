@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpsPulse — Infrastructure Operations</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">OP</div><div><strong>OpsPulse</strong><small>Infrastructure Operations</small></div></div>
+  <div class="workspace"><span class="workspace-dot"></span> Production workspace <span class="chevron">⌄</span></div>
+  <nav>
+    <p class="nav-label">WORKSPACE</p>
+    <a class="nav-item active" href="#overview" data-view="overview"><span>◫</span> Overview</a>
+    <a class="nav-item" href="#infrastructure" data-view="infrastructure"><span>▤</span> Infrastructure</a>
+    <a class="nav-item" href="#incidents" data-view="incidents"><span>⚑</span> Incidents <b class="nav-badge" id="incidentNavCount">3</b></a>
+    <a class="nav-item" href="#logs" data-view="logs"><span>≋</span> Logs</a>
+    <a class="nav-item" href="#alerts" data-view="alerts"><span>♧</span> Alert rules</a>
+    <p class="nav-label second">MANAGEMENT</p>
+    <a class="nav-item" href="#reports" data-view="reports"><span>▧</span> Reports</a>
+    <a class="nav-item" href="#settings" data-view="settings"><span>⚙</span> Settings</a>
+  </nav>
+  <div class="sidebar-bottom"><div class="user-card"><div class="avatar">DS</div><div><strong>Dora Sianipar</strong><small>Infrastructure Analyst</small></div><span class="more">•••</span></div><div class="sidebar-foot">OpsPulse v1.0 · Demo environment</div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="pageName">Overview</strong></div><div class="top-actions"><span class="live-pill"><i></i> LIVE SIMULATION</span><button class="icon-btn" id="refreshBtn" title="Refresh data">↻</button><button class="icon-btn" title="Notifications">♧<em></em></button><div class="top-avatar">DS</div></div></header>
+<section class="page" id="overviewView">
+<div class="page-heading"><div><div class="eyebrow">THURSDAY, NOVEMBER 20, 2026</div><h1>Good evening, Dora <span>✦</span></h1><p>Here's what's happening across your infrastructure right now.</p></div><button class="primary-btn" id="runCheck">▶ Run health check</button></div>
+<div class="status-banner"><div class="status-icon">✓</div><div><strong>Systems are operational</strong><p>Most services are healthy. 2 incidents need your attention.</p></div><span class="banner-time">Updated just now</span></div>
+<div class="metrics-grid">
+<div class="metric-card"><div class="metric-top"><span>Services monitored</span><span class="metric-icon blue">▤</span></div><div class="metric-value">12 <small>/ 14</small></div><div class="metric-foot"><span class="good">● 12 healthy</span><span class="warn">● 2 degraded</span></div></div>
+<div class="metric-card"><div class="metric-top"><span>Open incidents</span><span class="metric-icon orange">⚑</span></div><div class="metric-value" id="openMetric">3</div><div class="metric-foot"><span class="warn">2 high priority</span><span>· 1 acknowledged</span></div></div>
+<div class="metric-card"><div class="metric-top"><span>Avg. CPU usage</span><span class="metric-icon violet">◉</span></div><div class="metric-value" id="cpuMetric">42.8<small>%</small></div><div class="metric-foot"><span class="good">↓ 4.2% from last hour</span></div></div>
+<div class="metric-card"><div class="metric-top"><span>Uptime (30 days)</span><span class="metric-icon green">↗</span></div><div class="metric-value">99.96<small>%</small></div><div class="metric-foot"><span class="good">+0.02% this month</span></div></div>
+</div>
+<div class="content-grid main-grid">
+<div class="panel performance-panel"><div class="panel-head"><div><h2>System performance</h2><p>Resource utilization across production</p></div><div class="period-select"><button class="period active" data-period="1h">1H</button><button class="period" data-period="24h">24H</button><button class="period" data-period="7d">7D</button></div></div><div class="chart-legend"><span><i class="legend-line cpu"></i>CPU</span><span><i class="legend-line memory"></i>Memory</span><span><i class="legend-line network"></i>Network</span></div><div class="chart-area"><div class="chart-y"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><svg id="perfChart" viewBox="0 0 700 230" preserveAspectRatio="none" aria-label="Performance chart"><defs><linearGradient id="cpuFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#65a8ff" stop-opacity=".25"/><stop offset="1" stop-color="#65a8ff" stop-opacity="0"/></linearGradient></defs><g class="grid-lines"><line x1="0" y1="20" x2="700" y2="20"/><line x1="0" y1="68" x2="700" y2="68"/><line x1="0" y1="116" x2="700" y2="116"/><line x1="0" y1="164" x2="700" y2="164"/><line x1="0" y1="212" x2="700" y2="212"/></g><path id="cpuArea" d="" fill="url(#cpuFill)"/><path id="cpuLine" d="" class="chart-line cpu-line"/><path id="memLine" d="" class="chart-line mem-line"/><path id="netLine" d="" class="chart-line net-line"/></svg></div><div class="chart-x"><span>60 min ago</span><span>45 min</span><span>30 min</span><span>15 min</span><span>Now</span></div></div>
+<div class="panel incidents-panel"><div class="panel-head"><div><h2>Recent incidents</h2><p>Active events requiring attention</p></div><button class="text-btn" data-open="incidents">View all →</button></div><div class="incident-list" id="incidentList"></div></div>
+</div>
+<div class="content-grid lower-grid">
+<div class="panel services-panel"><div class="panel-head"><div><h2>Service health</h2><p>Critical components at a glance</p></div><button class="text-btn" data-open="infrastructure">Details →</button></div><div class="service-list" id="serviceList"></div></div>
+<div class="panel activity-panel"><div class="panel-head"><div><h2>Activity feed</h2><p>Latest infrastructure events</p></div><span class="live-pulse">LIVE</span></div><div class="activity-list" id="activityList"></div></div>
+</div>
+</section>
+<section class="page hidden" id="infrastructureView"><div class="page-heading"><div><div class="eyebrow">RESOURCE MANAGEMENT</div><h1>Infrastructure</h1><p>Inventory and live health of your monitored resources.</p></div><button class="primary-btn" id="addResource">＋ Add resource</button></div><div class="infra-summary" id="infraSummary"></div><div class="panel"><div class="panel-head"><div><h2>Resource inventory</h2><p>Nodes, hosts and services registered in this environment</p></div><input class="search" id="infraSearch" placeholder="Search resources…"></div><div class="table-wrap"><table><thead><tr><th>RESOURCE</th><th>TYPE</th><th>REGION</th><th>STATUS</th><th>CPU</th><th>MEMORY</th><th>UPTIME</th></tr></thead><tbody id="infraTable"></tbody></table></div></div></section>
+<section class="page hidden" id="incidentsView"><div class="page-heading"><div><div class="eyebrow">EVENT MANAGEMENT</div><h1>Incident center</h1><p>Track, acknowledge, and resolve operational incidents.</p></div><button class="primary-btn" id="createIncident">＋ Create incident</button></div><div class="filter-row"><button class="filter active" data-filter="all">All incidents</button><button class="filter" data-filter="open">Open</button><button class="filter" data-filter="acknowledged">Acknowledged</button><button class="filter" data-filter="resolved">Resolved</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>INCIDENT</th><th>SEVERITY</th><th>SERVICE</th><th>STATUS</th><th>CREATED</th><th>OWNER</th><th>ACTION</th></tr></thead><tbody id="incidentTable"></tbody></table></div></div></section>
+<section class="page hidden" id="logsView"><div class="page-heading"><div><div class="eyebrow">OBSERVABILITY</div><h1>Log explorer</h1><p>Search and filter simulated application and system events.</p></div><button class="primary-btn" id="exportLogs">↓ Export logs</button></div><div class="panel logs-panel"><div class="log-toolbar"><input id="logSearch" class="search wide" placeholder="Search log message, service, or host…"><select id="logLevel"><option value="all">All levels</option><option value="error">Error</option><option value="warn">Warning</option><option value="info">Info</option></select><select id="logService"><option value="all">All services</option></select><button class="secondary-btn" id="clearFilters">Reset</button></div><div class="logs-list" id="logsList"></div></div></section>
+<section class="page hidden" id="alertsView"><div class="page-heading"><div><div class="eyebrow">AUTOMATION</div><h1>Alert rules</h1><p>Define the thresholds that notify you before problems escalate.</p></div><button class="primary-btn" id="newAlert">＋ New alert rule</button></div><div class="alert-rule-grid" id="alertRules"></div></section>
+<section class="page hidden" id="reportsView"><div class="page-heading"><div><div class="eyebrow">ANALYTICS</div><h1>Reports</h1><p>Operational snapshots for service reliability.</p></div><button class="primary-btn" id="exportReport">↓ Export report</button></div><div class="report-grid" id="reportCards"></div><div class="panel report-panel"><div class="panel-head"><div><h2>Reliability overview</h2><p>Sample service performance over the last 30 days</p></div></div><div class="report-bars" id="reportBars"></div></div></section>
+<section class="page hidden" id="settingsView"><div class="page-heading"><div><div class="eyebrow">PREFERENCES</div><h1>Settings</h1><p>Configure your demo environment.</p></div></div><div class="settings-grid"><div class="panel settings-card"><h2>Environment</h2><p>Simulation settings and data behavior.</p><label class="setting-row"><div><strong>Live simulation</strong><small>Generate sample metric updates periodically</small></div><input type="checkbox" id="simulationToggle" checked></label><label class="setting-row"><div><strong>Show demo data</strong><small>Keep sample infrastructure in this project</small></div><input type="checkbox" checked disabled></label><label class="setting-row"><div><strong>Notifications</strong><small>Display visual alerts for critical incidents</small></div><input type="checkbox" id="notificationToggle" checked></label></div><div class="panel settings-card"><h2>About OpsPulse</h2><p>A front-end operations monitoring demo created for learning infrastructure operations concepts.</p><div class="about-list"><span>Version</span><strong>1.0.0</strong><span>Environment</span><strong>Demo / Simulated</strong><span>Stack</span><strong>HTML · CSS · JavaScript</strong><span>Data storage</span><strong>Browser local storage</strong></div><button class="secondary-btn danger-btn" id="resetDemo">Reset demo data</button></div></div></section>
+<footer class="main-footer"><span>OpsPulse</span><span>Built as an infrastructure operations portfolio project</span><span>© 2026</span></footer>
+</main></div>
+<div class="toast" id="toast"></div><div class="modal-backdrop hidden" id="modal"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Create incident</h2><button class="close-modal" id="closeModal">×</button></div><div id="modalBody"></div></div></div>
+<script src="app.js"></script>
+</body></html>
